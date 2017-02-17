@@ -1,0 +1,5 @@
+.sw[ponm]
+node_modules/
+npm-debug.log
+dev/*.js
+dist/*

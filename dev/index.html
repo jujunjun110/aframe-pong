@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    <title>project-name</title>
+    <script src="./build.js"></script>
+    <script src="./app.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <a-scene physics="debug: true; gravity: 0;">
+        <a-assets></a-assets>
+        <a-plane position="8 0 0" rotation="0 -90 -90" scale="10 10 10 " material="color:lightblue"></a-plane>
+        <a-plane position="-8 0 0" rotation="0 90 -90" scale="10 10 10 " material="color:lightblue"></a-plane>
+        <a-sphere ball dynamic-body></a-sphere>
+        <a-sky color="#ccc"></a-sky>
+        <a-camera position="0 0 10"></a-camera>
+    </a-scene>
+</body>
+
+</html>
+
