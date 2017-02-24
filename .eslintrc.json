@@ -6,6 +6,7 @@
     },
     "globals": {
         "AFRAME": true,
+        "CANNON": true,
         "THREE": true
     },
     "rules": {

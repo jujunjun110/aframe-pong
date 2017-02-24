@@ -7,18 +7,39 @@ AFRAME.registerComponent('ball', {
     schema: {},
     multiple: false,
     init: function () {
-        console.log('start')
-    },
-    update: function (oldData) {},
-    remove: function () {},
-    tick: function (t) {
-        // console.log('tick')
         const el = this.el
-        const pos = el.getAttribute('position')
-        pos.x += 0.01
-        el.setAttribute('position', pos)
+        el.addEventListener('startGame', () => {
+            this.startGame()
+        })
+        el.addEventListener('collide', () => {
+            this.speedUpIfNeeded()
+        })
     },
-    pause: function () {},
-    play: function () {}
+    speedUpIfNeeded: function () {
+        const velocity = this.el.body.velocity
+        let speedUp = 1.05
+        const speed = new THREE.Vector3().distanceTo(velocity)
+
+        if (speed > 10) {
+            speedUp = 1.02
+        } else if (speedUp > 20) {
+            speedUp = 1
+        }
+
+        console.log(speed)
+
+        this.el.body.velocity = new CANNON.Vec3(
+            velocity.x * speedUp,
+            velocity.y * speedUp,
+            velocity.z * speedUp
+        )
+    },
+    getVelocity: function (velocity) {},
+    startGame: function () {
+        console.log('startGame')
+        const body = this.el.body
+        body.type = 1
+        body.velocity = new CANNON.Vec3(6, 4, 4)
+    }
 })
 
