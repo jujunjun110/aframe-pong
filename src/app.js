@@ -1,5 +1,7 @@
 console.warn = function () {}
+require('./player.js')
 require('./ball.js')
+require('./enemy.js')
 
 document.addEventListener('DOMContentLoaded', function () {
     if (typeof AFRAME === 'undefined') {
