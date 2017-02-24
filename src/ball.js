@@ -34,7 +34,6 @@ AFRAME.registerComponent('ball', {
             velocity.z * speedUp
         )
     },
-    getVelocity: function (velocity) {},
     startGame: function () {
         console.log('startGame')
         const body = this.el.body

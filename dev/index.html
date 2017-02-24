@@ -11,11 +11,11 @@
     <a-scene physics="debug: false;gravity: 0;friction: 0; restitution: 1.0;">
         <a-assets></a-assets>
         <!-- walls -->
-        <a-plane wall position="5 0 0" static-body rotation="0 -90 -90" scale="10 20 1 " material="color:lightblue"></a-plane>
-        <a-plane wall position="-5 0 0" static-body rotation="0 90 -90" scale="10 20 1 " material="color:lightblue"></a-plane>
-        <a-plane wall position="0 -5 0" static-body rotation="-90 0 0" scale="10 20 1 " material="color:lightblue"></a-plane>
-        <a-plane wall position="0 5 0" static-body rotation="90 0 0" scale="10 20 1 " material="color:lightblue"></a-plane>
-        <a-plane wall position="0 0 -10" static-body rotation="0 0 0" scale="10 10 1 " material="color:red"></a-plane>
+        <a-plane position="5 0 0" static-body rotation="0 -90 -90" scale="10 20 1 " material="color:lightblue"></a-plane>
+        <a-plane position="-5 0 0" static-body rotation="0 90 -90" scale="10 20 1 " material="color:lightblue"></a-plane>
+        <a-plane position="0 -5 0" static-body rotation="-90 0 0" scale="10 20 1 " material="color:lightblue"></a-plane>
+        <a-plane position="0 5 0" static-body rotation="90 0 0" scale="10 20 1 " material="color:lightblue"></a-plane>
+        <a-plane position="0 0 -10" static-body rotation="0 0 0" scale="10 10 1 " material="color:red"></a-plane>
         <!-- ball -->
         <a-entity class="ignore-ray" id="ball" geometry="primitive:sphere" material="color:lightgreen" ball dynamic-body="angularDamping:0.0;linearDamping:0.0;mass:5"></a-entity>
         <!-- controller -->
