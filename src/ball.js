@@ -16,11 +16,23 @@ AFRAME.registerComponent('ball', {
             this.speedUpIfNeeded()
         })
         el.addEventListener('startGame', () => {
-            this.startGame()
+            this.startGame('player')
         })
-        el.addEventListener('restartGame', (e) => {
+        el.addEventListener('gameEnded', (e) => {
+            if (!this.canCollide) {
+                return
+            }
+            this.canCollide = false
+
+            const el = this.el
+            el.body.velocity = new CANNON.Vec3(0, 0, 0)
             const winner = e.detail.side === 'player' ? 'enemy' : 'player'
-            this.restartGame(winner)
+            this.points[winner] += 1
+            this.reloadLcd()
+            if (this.points.player >= 11 || this.points.enemy >= 11) {
+                return
+            }
+            this.restartGame(e.detail.side)
         })
     },
     speedUpIfNeeded: function () {
@@ -31,7 +43,7 @@ AFRAME.registerComponent('ball', {
 
         if (speed > 10) {
             speedUp = 1.05
-        } else if (speed > 40) {
+        } else if (speed > 25) {
             speedUp = 1
         }
         const zLimit = 5
@@ -46,23 +58,35 @@ AFRAME.registerComponent('ball', {
             vz * speedUp
         )
     },
-    startGame: function () {
+    startGame: function (side) {
         const body = this.el.body
+        const direction = side === 'player' ? 1 : 0
+        const enemy = document.getElementById('enemy')
+        this.canCollide = true
+        enemy.emit('gameStart')
+
         body.position = new CANNON.Vec3(0, 0, -15)
-        body.velocity = new CANNON.Vec3(6, 4, 4)
-    },
-    restartGame: function (winner) {
-        const el = this.el
-        el.body.velocity = new CANNON.Vec3(0, 0, 0)
-        this.points[winner] += 1
-        this.reloadLcd()
+        body.velocity = new CANNON.Vec3(0, 0, 0)
         setTimeout(() => {
-            this.startGame()
-        }, 3000)
+            body.velocity = new CANNON.Vec3(6, 4, 4 * direction)
+        }, 2000)
+    },
+    restartGame: function (side) {
+        setTimeout(() => {
+            this.startGame(side)
+        }, 1000)
     },
     reloadLcd: function () {
         const lcd = document.getElementById('lcd')
-        const txt = this.points.player + ' - ' + this.points.enemy
+        let txt = this.points.player + ' - ' + this.points.enemy
+        if (this.points.player >= 11) {
+            txt += '\n You Win!!'
+            lcd.setAttribute('bmfont-text', 'color', 'red')
+        }
+        if (this.points.enemy >= 11) {
+            txt += '\n You Lose...'
+            lcd.setAttribute('bmfont-text', 'color', 'blue')
+        }
         lcd.setAttribute('bmfont-text', 'text', txt)
     }
 })

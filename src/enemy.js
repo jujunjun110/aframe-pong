@@ -12,6 +12,9 @@ AFRAME.registerComponent('enemy', {
         this.el.addEventListener('playerCollide', () => {
             this.isChasingBall = true
         })
+        this.el.addEventListener('gameStart', () => {
+            this.isChasingBall = true
+        })
     },
     tick: function (t) {
         const el = this.el
