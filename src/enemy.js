@@ -22,8 +22,8 @@ AFRAME.registerComponent('enemy', {
             targetPos = ball.getAttribute('position')
         }
         const newPos = new THREE.Vector3(
-            myPos.x + (targetPos.x - myPos.x) * 0.05,
-            myPos.y + (targetPos.y - myPos.y) * 0.05,
+            myPos.x + (targetPos.x - myPos.x) * 0.1,
+            myPos.y + (targetPos.y - myPos.y) * 0.1,
             myPos.z
         )
         el.setAttribute('position', newPos)

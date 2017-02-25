@@ -1,8 +1,9 @@
 console.warn = function () {}
 require('./player.js')
 require('./player-mover.js')
-require('./ball.js')
 require('./enemy.js')
+require('./ball.js')
+require('./goal-wall.js')
 
 document.addEventListener('DOMContentLoaded', function () {
     if (typeof AFRAME === 'undefined') {
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function main() {
         const ball = document.getElementById('ball')
-        ball.emit('startGame')
+        ball.emit('restartGame')
     }
 })
 
