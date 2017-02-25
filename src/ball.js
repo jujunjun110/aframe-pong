@@ -8,30 +8,32 @@ AFRAME.registerComponent('ball', {
     multiple: false,
     init: function () {
         const el = this.el
+        this.points = {
+            'player': 0,
+            'enemy': 0
+        }
         el.addEventListener('collide', () => {
             this.speedUpIfNeeded()
         })
         el.addEventListener('startGame', () => {
             this.startGame()
         })
-        el.addEventListener('restartGame', () => {
-            el.body.velocity = new CANNON.Vec3(0, 0, 0)
-            setTimeout(() => {
-                this.startGame()
-            }, 3000)
+        el.addEventListener('restartGame', (e) => {
+            const winner = e.detail.side === 'player' ? 'enemy' : 'player'
+            this.restartGame(winner)
         })
     },
     speedUpIfNeeded: function () {
         const velocity = this.el.body.velocity
-        let speedUp = 1.05
+        let speedUp = 1.1
+        let vz = velocity.z
         const speed = new THREE.Vector3().distanceTo(velocity)
 
         if (speed > 10) {
-            speedUp = 1.02
-        } else if (speedUp > 20) {
+            speedUp = 1.05
+        } else if (speed > 40) {
             speedUp = 1
         }
-        let vz = velocity.z
         const zLimit = 5
 
         if (Math.abs(vz) < zLimit) {
@@ -48,6 +50,20 @@ AFRAME.registerComponent('ball', {
         const body = this.el.body
         body.position = new CANNON.Vec3(0, 0, -15)
         body.velocity = new CANNON.Vec3(6, 4, 4)
+    },
+    restartGame: function (winner) {
+        const el = this.el
+        el.body.velocity = new CANNON.Vec3(0, 0, 0)
+        this.points[winner] += 1
+        this.reloadLcd()
+        setTimeout(() => {
+            this.startGame()
+        }, 3000)
+    },
+    reloadLcd: function () {
+        const lcd = document.getElementById('lcd')
+        const txt = this.points.player + ' - ' + this.points.enemy
+        lcd.setAttribute('bmfont-text', 'text', txt)
     }
 })
 

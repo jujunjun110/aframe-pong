@@ -14,8 +14,8 @@ AFRAME.registerComponent('goal-wall', {
         const el = this.el
         const ball = document.getElementById('ball')
         el.addEventListener('collide', () => {
-            console.log('game over. ' + this.data.side + ' lost.')
-            ball.emit('restartGame')
+            const side = this.data.side
+            ball.emit('restartGame', { side: side })
         })
     }
 })

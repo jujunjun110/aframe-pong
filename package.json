@@ -45,7 +45,8 @@
         "uglifyify": "^3.0.4"
     },
     "dependencies": {
-        "aframe": "^0.4.0"
+        "aframe": "^0.4.0",
+        "aframe-bmfont-text-component": "^0.1.4"
     }
 }
 

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function main() {
         const ball = document.getElementById('ball')
-        ball.emit('restartGame')
+        ball.emit('startGame')
     }
 })
 
