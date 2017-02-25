@@ -45,7 +45,8 @@
         "uglifyify": "^3.0.4"
     },
     "dependencies": {
-        "aframe": "^0.4.0"
+        "aframe": "^0.4.0",
+        "aframe-webvr-controller": "0.0.7"
     }
 }
 
