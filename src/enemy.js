@@ -12,6 +12,9 @@ AFRAME.registerComponent('enemy', {
         this.el.addEventListener('playerCollide', () => {
             this.isChasingBall = true
         })
+        this.el.addEventListener('gameStart', () => {
+            this.isChasingBall = true
+        })
     },
     tick: function (t) {
         const el = this.el
@@ -22,8 +25,8 @@ AFRAME.registerComponent('enemy', {
             targetPos = ball.getAttribute('position')
         }
         const newPos = new THREE.Vector3(
-            myPos.x + (targetPos.x - myPos.x) * 0.05,
-            myPos.y + (targetPos.y - myPos.y) * 0.05,
+            myPos.x + (targetPos.x - myPos.x) * 0.1,
+            myPos.y + (targetPos.y - myPos.y) * 0.1,
             myPos.z
         )
         el.setAttribute('position', newPos)

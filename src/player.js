@@ -5,11 +5,9 @@ if (typeof AFRAME === 'undefined') {
 /* here you write your components. */
 AFRAME.registerComponent('player', {
     init: function () {
-        console.log('playerinit')
         const el = this.el
         const enemy = document.getElementById('enemy')
         el.addEventListener('collide', () => {
-            console.log('collide')
             enemy.emit('playerCollide')
         })
     }

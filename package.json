@@ -46,7 +46,8 @@
     },
     "dependencies": {
         "aframe": "^0.4.0",
-        "aframe-webvr-controller": "0.0.7"
+        "aframe-webvr-controller": "0.0.7",
+        "aframe-bmfont-text-component": "^0.1.4"
     }
 }
 
