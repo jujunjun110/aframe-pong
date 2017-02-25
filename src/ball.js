@@ -35,9 +35,7 @@ AFRAME.registerComponent('ball', {
         )
     },
     startGame: function () {
-        console.log('startGame')
         const body = this.el.body
-        body.type = 1
         body.velocity = new CANNON.Vec3(6, 4, 4)
     }
 })

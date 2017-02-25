@@ -1,5 +1,6 @@
 console.warn = function () {}
 require('./player.js')
+require('./player-mover.js')
 require('./ball.js')
 require('./enemy.js')
 
@@ -16,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function main() {
-        const el = document.getElementById('ball')
-        el.emit('startGame')
+        const ball = document.getElementById('ball')
+        ball.emit('startGame')
     }
 })
 

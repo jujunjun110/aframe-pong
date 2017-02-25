@@ -16,7 +16,6 @@ AFRAME.registerComponent('enemy', {
     tick: function (t) {
         const el = this.el
         const myPos = el.getAttribute('position')
-
         let targetPos = new THREE.Vector3(0, 0, 0)
         if (this.isChasingBall) {
             const ball = document.getElementById('ball')
@@ -27,8 +26,7 @@ AFRAME.registerComponent('enemy', {
             myPos.y + (targetPos.y - myPos.y) * 0.05,
             myPos.z
         )
-
         el.setAttribute('position', newPos)
-    },
+    }
 })
 

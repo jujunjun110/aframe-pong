@@ -8,23 +8,23 @@
 </head>
 
 <body>
-    <a-scene physics="debug: false;gravity: 0;friction: 0; restitution: 1.0;">
+    <a-scene physics="debug: false;gravity: 0;friction: 0; restitution: 1.0;" antialias="true">
         <a-assets></a-assets>
         <!-- walls -->
         <a-plane position="5 0 -15" static-body rotation="0 -90 -90" scale="10 20 1 " material="color:lightblue"></a-plane>
         <a-plane position="-5 0 -15" static-body rotation="0 90 -90" scale="10 20 1 " material="color:lightblue"></a-plane>
         <a-plane position="0 -5 -15" static-body rotation="-90 0 0" scale="10 20 1 " material="color:lightblue"></a-plane>
         <a-plane position="0 5 -15" static-body rotation="90 0 0" scale="10 20 1 " material="color:lightblue"></a-plane>
-        <!-- enemy -->
-        <a-plane id="enemy" position="0 0 -25" static-body enemy rotation="0 0 0" scale="3 3 1 " material="color:red"></a-plane>
+        <a-plane player-mover material="color:red;opacity:0;" position="0 0 -5" scale="10 10 1"></a-plane>
         <!-- ball -->
         <a-entity id="ball" class="ignore-ray" id="ball" geometry="primitive:sphere" material="color:lightgreen" ball dynamic-body="angularDamping:0.0;linearDamping:0.0;mass:5" position="0 0 -15"></a-entity>
-        <!-- controller -->
-        <a-plane id="player" material="color:red;opacity:0;" position="0 0 -5" scale="10 10 1"></a-plane>
-        <a-cursor player geometry="primitive:box" scale="3 3 0.1" static-body></a-cursor>
+        <!-- player -->
+        <a-cursor id="player" player geometry="primitive:box" scale="3 3 0.1" static-body></a-cursor>
+        <!-- enemy -->
+        <a-plane id="enemy" position="0 0 -25" static-body enemy scale="3 3 1" material="color:red;opacity:1;"></a-plane>
         <!-- env -->
         <a-sky color="#ccc"></a-sky>
-        <a-camera position="0 0 0" raycaster crawling-cursor></a-camera>
+        <a-camera position="0 0 0" raycaster></a-camera>
     </a-scene>
 </body>
 
