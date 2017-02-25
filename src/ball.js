@@ -42,8 +42,8 @@ AFRAME.registerComponent('ball', {
         const speed = new THREE.Vector3().distanceTo(velocity)
 
         if (speed > 10) {
-            speedUp = 1.05
-        } else if (speed > 25) {
+            speedUp = 1.03
+        } else if (speed > 20) {
             speedUp = 1
         }
         const zLimit = 5
@@ -68,7 +68,7 @@ AFRAME.registerComponent('ball', {
         body.position = new CANNON.Vec3(0, 0, -15)
         body.velocity = new CANNON.Vec3(0, 0, 0)
         setTimeout(() => {
-            body.velocity = new CANNON.Vec3(6, 4, 4 * direction)
+            body.velocity = new CANNON.Vec3(Math.random() * 3 + 3, Math.random() * 3 + 3, 4 * direction)
         }, 2000)
     },
     restartGame: function (side) {
