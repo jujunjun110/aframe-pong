@@ -41,12 +41,12 @@ AFRAME.registerComponent('ball', {
         let vz = velocity.z
         const speed = new THREE.Vector3().distanceTo(velocity)
 
-        if (speed > 10) {
+        if (speed > 1) {
             speedUp = 1.03
-        } else if (speed > 20) {
+        } else if (speed > 2) {
             speedUp = 1
         }
-        const zLimit = 5
+        const zLimit = 0.5
 
         if (Math.abs(vz) < zLimit) {
             vz = vz > 0 ? zLimit : -zLimit
@@ -59,7 +59,6 @@ AFRAME.registerComponent('ball', {
         )
     },
     startGame: function (side) {
-        // console.log(this.el.getAttribute('dynamic-body'))
         const el = document.getElementById('ball')
         const body = el.body
         const direction = side === 'player' ? 1 : 0
@@ -67,13 +66,13 @@ AFRAME.registerComponent('ball', {
         this.canCollide = true
         enemy.emit('gameStart')
 
-        body.position = new CANNON.Vec3(0, 0, -15)
+        body.position = new CANNON.Vec3(0, 1, -2)
         body.velocity = new CANNON.Vec3(0, 0, 0)
         setTimeout(() => {
             body.velocity = new CANNON.Vec3(
-                Math.random() * 3 + 3,
-                Math.random() * 3 + 3,
-                direction * 4
+                Math.random() * 0.3 + 0.3,
+                Math.random() * 0.3 + 0.3,
+                direction * 0.4
             )
         }, 2000)
     },
