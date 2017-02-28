@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>project-name</title>
+    <script src="./build.js"></script>
+    <script src="./app.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <a-scene physics="debug: false;gravity: 0;friction: 0; restitution: 1.0;" antialias="true">
+        <a-assets>
+            <a-mixin id="wall" static-body scale="10 20 1" material="color:lightblue"></a-mixin>
+        </a-assets>
+        <!-- walls -->
+        <a-plane mixin="wall" position="5 0 -15" rotation="0 -90 -90"></a-plane>
+        <a-plane mixin="wall" position="-5 0 -15" rotation="  0 90 -90"></a-plane>
+        <a-plane mixin="wall" position="0 -5 -15" rotation="-90  0   0"></a-plane>
+        <a-plane mixin="wall" position="0  5 -15" rotation=" 90  0   0"></a-plane>
+        <a-plane player-mover material="opacity:0;" position="0 0 -5" scale="10 10 1"></a-plane>
+        <a-plane goal-wall="side: player" static-body material="opacity:0;" position="0 0 5" scale="1000 1000 1"></a-plane>
+        <a-plane goal-wall="side: enemy" static-body material="opacity:0;" position="0 0 -30" scale="1000 1000 1"></a-plane>
+        <a-entity id="lcd" bmfont-text="text: 0 - 0;align:center;" position="-2.5 0 -4"></a-entity>
+        <!-- ball -->
+        <a-sphere id="ball" id="ball" material="color: lightgreen" ball dynamic-body position="0 0 -15"></a-sphere>
+        <!-- player -->
+        <a-box id="player" player material="color: black; opacity:0.8" scale="3 3 0.1" static-body></a-box>
+        <!-- enemy -->
+        <a-plane id="enemy" position="0 0 -25" static-body enemy scale="3 3 1" material="color:red;opacity:1;"></a-plane>
+        <!-- env -->
+        <a-sky color="#ccc"></a-sky>
+        <a-camera position="0 0 0" raycaster></a-camera>
+    </a-scene>
+</body>
+
+</html>
+
