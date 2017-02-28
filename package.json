@@ -8,7 +8,7 @@
         "build": "browserify src/require.js -t babelify -o dev/build.js && browserify src/app.js -t browserify-shader -t babelify -o dev/app.js",
         "dev": "budo src/app.js --live --open --dir dev -- -t browserify-shader -t babelify -o dev/app.js",
         "dist": "npm run build && rm -rf ./dist && cp -r dev dist && rm -rf dist/*.js && browserify -t uglifyify src/require_dist.js -o dist/build.js && sed -i '' -e 's#<script src=\"./app.js\"></script>##g' dist/index.html && npm run showdist",
-        "preghpages": "npm run build && shx rm -rf gh-pages && shx mkdir gh-pages && shx cp -r build/* gh-pages",
+        "preghpages": "npm run build && shx rm -rf gh-pages && shx mkdir gh-pages && shx cp -r dev/* gh-pages",
         "ghpages": "npm run preghpages && ghpages -p gh-pages",
         "showdist": "budo --open --dir dist",
         "lint": "eslint src; exit 0",

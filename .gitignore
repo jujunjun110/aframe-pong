@@ -1,5 +1,6 @@
 .sw[ponm]
 node_modules/
 npm-debug.log
+gh-pages
 dev/*.js
 dist/*
