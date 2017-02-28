@@ -3,7 +3,7 @@
 <head>
     <title>project-name</title>
     <script src="./build.js"></script>
-    
+    <script src="./app.js"></script>
     <!-- Origin Trial Token, feature = WebVR, origin = https://jujunjun110.github.io, expires = 2017-04-07 -->
     <meta http-equiv="origin-trial" data-feature="WebVR" data-expires="2017-04-07" content="Al8ODP7rrI3XNidV/OXeN4akx4QzWz0JJMOdjEfo23n0nlGorQj4UA/j7MpwEiQlWO7blIHaGLNfc48ar7XwmQYAAABneyJvcmlnaW4iOiJodHRwczovL2p1anVuanVuMTEwLmdpdGh1Yi5pbzo0NDMiLCJmZWF0dXJlIjoiV2ViVlIiLCJleHBpcnkiOjE0OTE1NzQyNjMsImlzU3ViZG9tYWluIjp0cnVlfQ==">
     <link rel="stylesheet" href="./css/style.css">
@@ -27,8 +27,12 @@
         <a-sphere id="ball" id="ball" material="color: lightgreen" ball dynamic-body position="0 0 -15"></a-sphere>
         <!-- player -->
         <a-box id="player" player material="color: black; opacity:0.8" scale="3 3 0.1" static-body></a-box>
-        <a-box player position="0 0 10" material="color: black; opacity:0.8" scale="3 3 0.1" static-body vive-controls="hand:left"></a-box>
-        <a-box player position="0 0 10" material="color: black; opacity:0.8" scale="3 3 0.1" static-body vive-controls="hand:right"></a-box>
+        <a-entity vive-controls="hand: left">
+            <a-box player position="0 0 0" material="color: black; opacity:0.8" scale="3 3 0.1" static-body></a-box>
+        </a-entity>
+        <a-entity vive-controls="hand: right">
+            <a-box player position="0 0 0" material="color: black; opacity:0.8" scale="3 3 0.1" static-body></a-box>
+        </a-entity>
         <!-- enemy -->
         <a-plane id="enemy" position="0 0 -25" static-body enemy scale="3 3 1" material="color:red;opacity:1;"></a-plane>
         <!-- env -->
