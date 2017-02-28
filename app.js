@@ -43,10 +43,10 @@ AFRAME.registerComponent('ball', {
         var _this = this;
 
         var el = this.el;
-        this.points = {
-            'player': 0,
-            'enemy': 0
-        };
+        this.defaultPos = el.getAttribute('position');
+        this.matchPoint = 11;
+        this.points = { 'player': 0, 'enemy': 0 };
+
         el.addEventListener('collide', function () {
             _this.speedUpIfNeeded();
         });
@@ -64,7 +64,7 @@ AFRAME.registerComponent('ball', {
             var winner = e.detail.side === 'player' ? 'enemy' : 'player';
             _this.points[winner] += 1;
             _this.reloadLcd();
-            if (_this.points.player >= 11 || _this.points.enemy >= 11) {
+            if (_this.points.player >= _this.matchPoint || _this.points.enemy >= _this.matchPoint) {
                 return;
             }
             _this.restartGame(e.detail.side);
@@ -72,36 +72,37 @@ AFRAME.registerComponent('ball', {
     },
     speedUpIfNeeded: function speedUpIfNeeded() {
         var velocity = this.el.body.velocity;
-        var speedUp = 1.1;
-        var vz = velocity.z;
         var speed = new THREE.Vector3().distanceTo(velocity);
 
-        if (speed > 10) {
-            speedUp = 1.03;
-        } else if (speed > 20) {
-            speedUp = 1;
+        var maxSpeed = 2;
+        var zLimit = 0.5;
+        var vz = velocity.z;
+        var speedUpRate = 1.1;
+
+        if (speed > 1) {
+            speedUpRate = 1.03;
+        } else if (speed > maxSpeed) {
+            speedUpRate = 0.97;
         }
-        var zLimit = 5;
 
         if (Math.abs(vz) < zLimit) {
             vz = vz > 0 ? zLimit : -zLimit;
         }
 
-        this.el.body.velocity = new CANNON.Vec3(velocity.x * speedUp, velocity.y * speedUp, vz * speedUp);
+        this.el.body.velocity = new CANNON.Vec3(velocity.x * speedUpRate, velocity.y * speedUpRate, vz * speedUpRate);
     },
     startGame: function startGame(side) {
-        // console.log(this.el.getAttribute('dynamic-body'))
         var el = document.getElementById('ball');
         var body = el.body;
-        var direction = side === 'player' ? 1 : 0;
+        var direction = side === 'player' ? 1 : -1;
         var enemy = document.getElementById('enemy');
         this.canCollide = true;
         enemy.emit('gameStart');
 
-        body.position = new CANNON.Vec3(0, 0, -15);
+        body.position = new CANNON.Vec3(this.defaultPos.x, this.defaultPos.y, this.defaultPos.z);
         body.velocity = new CANNON.Vec3(0, 0, 0);
         setTimeout(function () {
-            body.velocity = new CANNON.Vec3(Math.random() * 3 + 3, Math.random() * 3 + 3, direction * 4);
+            body.velocity = new CANNON.Vec3((Math.random() + 1) * 0.5, (Math.random() + 1) * 0.5, direction);
         }, 2000);
     },
     restartGame: function restartGame(side) {
@@ -114,14 +115,15 @@ AFRAME.registerComponent('ball', {
     reloadLcd: function reloadLcd() {
         var lcd = document.getElementById('lcd');
         var txt = this.points.player + ' - ' + this.points.enemy;
-        if (this.points.player >= 11) {
+
+        if (this.points.player >= this.matchPoint) {
             txt += '\n You Win!!';
             lcd.setAttribute('bmfont-text', 'color', 'red');
-        }
-        if (this.points.enemy >= 11) {
+        } else if (this.points.enemy >= this.matchPoint) {
             txt += '\n You Lose...';
             lcd.setAttribute('bmfont-text', 'color', 'blue');
         }
+
         lcd.setAttribute('bmfont-text', 'text', txt);
     }
 });
@@ -138,7 +140,10 @@ AFRAME.registerComponent('enemy', {
     init: function init() {
         var _this = this;
 
+        this.ball = document.getElementById('ball');
+        this.defaultPosition = this.el.getAttribute('position');
         this.isChasingBall = true;
+
         this.el.addEventListener('collide', function () {
             _this.isChasingBall = false;
         });
@@ -150,14 +155,15 @@ AFRAME.registerComponent('enemy', {
         });
     },
     tick: function tick(t) {
+        var followRate = 0.1; // efficiency of enemy
+
         var el = this.el;
         var myPos = el.getAttribute('position');
-        var targetPos = new THREE.Vector3(0, 0, 0);
+        var targetPos = this.defaultPosition;
         if (this.isChasingBall) {
-            var ball = document.getElementById('ball');
-            targetPos = ball.getAttribute('position');
+            targetPos = this.ball.getAttribute('position');
         }
-        var newPos = new THREE.Vector3(myPos.x + (targetPos.x - myPos.x) * 0.1, myPos.y + (targetPos.y - myPos.y) * 0.1, myPos.z);
+        var newPos = new THREE.Vector3(myPos.x + (targetPos.x - myPos.x) * followRate, myPos.y + (targetPos.y - myPos.y) * followRate, myPos.z);
         el.setAttribute('position', newPos);
     }
 });
