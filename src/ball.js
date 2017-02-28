@@ -44,7 +44,7 @@ AFRAME.registerComponent('ball', {
         if (speed > 1) {
             speedUp = 1.03
         } else if (speed > 2) {
-            speedUp = 1
+            speedUp = 0.95
         }
         const zLimit = 0.5
 
@@ -70,9 +70,9 @@ AFRAME.registerComponent('ball', {
         body.velocity = new CANNON.Vec3(0, 0, 0)
         setTimeout(() => {
             body.velocity = new CANNON.Vec3(
-                Math.random() * 0.3 + 0.3,
-                Math.random() * 0.3 + 0.3,
-                direction * 0.4
+                Math.random() * 0.5 + 0.5,
+                Math.random() * 0.5 + 0.5,
+                direction * 1.0
             )
         }, 2000)
     },

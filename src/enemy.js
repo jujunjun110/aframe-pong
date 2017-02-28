@@ -5,7 +5,10 @@ if (typeof AFRAME === 'undefined') {
 /* here you write your components. */
 AFRAME.registerComponent('enemy', {
     init: function () {
+        this.ball = document.getElementById('ball')
+        this.defaultPosition = this.el.getAttribute('position')
         this.isChasingBall = true
+
         this.el.addEventListener('collide', () => {
             this.isChasingBall = false
         })
@@ -17,16 +20,17 @@ AFRAME.registerComponent('enemy', {
         })
     },
     tick: function (t) {
+        const followRate = 0.1 // efficiency of enemy
+
         const el = this.el
         const myPos = el.getAttribute('position')
-        let targetPos = new THREE.Vector3(0, 0, 0)
+        let targetPos = this.defaultPosition
         if (this.isChasingBall) {
-            const ball = document.getElementById('ball')
-            targetPos = ball.getAttribute('position')
+            targetPos = this.ball.getAttribute('position')
         }
         const newPos = new THREE.Vector3(
-            myPos.x + (targetPos.x - myPos.x) * 0.1,
-            myPos.y + (targetPos.y - myPos.y) * 0.1,
+            myPos.x + (targetPos.x - myPos.x) * followRate,
+            myPos.y + (targetPos.y - myPos.y) * followRate,
             myPos.z
         )
         el.setAttribute('position', newPos)
