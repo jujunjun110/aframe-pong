@@ -8,6 +8,8 @@
         "build": "browserify src/require.js -t babelify -o dev/build.js && browserify src/app.js -t browserify-shader -t babelify -o dev/app.js",
         "dev": "budo src/app.js --live --open --dir dev -- -t browserify-shader -t babelify -o dev/app.js",
         "dist": "npm run build && rm -rf ./dist && cp -r dev dist && rm -rf dist/*.js && browserify -t uglifyify src/require_dist.js -o dist/build.js && sed -i '' -e 's#<script src=\"./app.js\"></script>##g' dist/index.html && npm run showdist",
+        "preghpages": "npm run build && shx rm -rf gh-pages && shx mkdir gh-pages && shx cp -r build/* gh-pages",
+        "ghpages": "npm run preghpages && ghpages -p gh-pages",
         "showdist": "budo --open --dir dist",
         "lint": "eslint src; exit 0",
         "unboil": "node src/unboil.js"
@@ -38,6 +40,7 @@
         "budo": "^9.4.7",
         "envify": "^4.0.0",
         "eslint": "^3.14.1",
+        "ghpages": "0.0.10",
         "inquirer": "^3.0.1",
         "shelljs": "^0.7.0",
         "shx": "^0.2.2",
