@@ -59,7 +59,9 @@ AFRAME.registerComponent('ball', {
         )
     },
     startGame: function (side) {
-        const body = this.el.body
+        // console.log(this.el.getAttribute('dynamic-body'))
+        const el = document.getElementById('ball')
+        const body = el.body
         const direction = side === 'player' ? 1 : 0
         const enemy = document.getElementById('enemy')
         this.canCollide = true
@@ -68,7 +70,11 @@ AFRAME.registerComponent('ball', {
         body.position = new CANNON.Vec3(0, 0, -15)
         body.velocity = new CANNON.Vec3(0, 0, 0)
         setTimeout(() => {
-            body.velocity = new CANNON.Vec3(Math.random() * 3 + 3, Math.random() * 3 + 3, 4 * direction)
+            body.velocity = new CANNON.Vec3(
+                Math.random() * 3 + 3,
+                Math.random() * 3 + 3,
+                direction * 4
+            )
         }, 2000)
     },
     restartGame: function (side) {
