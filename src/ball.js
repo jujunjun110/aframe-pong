@@ -39,17 +39,17 @@ AFRAME.registerComponent('ball', {
         const velocity = this.el.body.velocity
         const speed = new THREE.Vector3().distanceTo(velocity)
 
-        const maxSpeed = 2
-        const zLimit = 0.5
+        const maxSpeed = 5
+        const zLimit = 1.5
         let vz = velocity.z
         let speedUpRate = 1.1
 
         if (speed > 1) {
             speedUpRate = 1.03
-        } else if (speed > maxSpeed) {
+        }
+        if (speed > maxSpeed) {
             speedUpRate = 0.97
         }
-
         if (Math.abs(vz) < zLimit) {
             vz = vz > 0 ? zLimit : -zLimit
         }

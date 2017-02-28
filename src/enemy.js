@@ -4,6 +4,11 @@ if (typeof AFRAME === 'undefined') {
 
 /* here you write your components. */
 AFRAME.registerComponent('enemy', {
+    schema: {
+        efficiency: {
+            default: 0.1
+        }
+    },
     init: function () {
         this.ball = document.getElementById('ball')
         this.defaultPosition = this.el.getAttribute('position')
@@ -20,8 +25,6 @@ AFRAME.registerComponent('enemy', {
         })
     },
     tick: function (t) {
-        const followRate = 0.8 // efficiency of enemy
-
         const el = this.el
         const myPos = el.getAttribute('position')
         let targetPos = this.defaultPosition
@@ -29,8 +32,8 @@ AFRAME.registerComponent('enemy', {
             targetPos = this.ball.getAttribute('position')
         }
         const newPos = new THREE.Vector3(
-            myPos.x + (targetPos.x - myPos.x) * followRate,
-            myPos.y + (targetPos.y - myPos.y) * followRate,
+            myPos.x + (targetPos.x - myPos.x) * this.data.efficiency,
+            myPos.y + (targetPos.y - myPos.y) * this.data.efficiency,
             myPos.z
         )
         el.setAttribute('position', newPos)
