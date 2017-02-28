@@ -27,16 +27,14 @@
         <!-- ball -->
         <a-sphere id="ball" radius="0.15" material="color: lightgreen" ball dynamic-body position="0 1 -2"></a-sphere>
         <!-- player -->
-        <a-plane player-mover material="opacity:0;" position="0 1.0 -1.0" scale="1.6 1.6 1"></a-plane>
-        <a-box id="player" player mixin="racket"></a-box>
-        <!-- 
+        <!-- <a-plane player-mover material="opacity:0;" position="0 1.0 -1.0" scale="1.6 1.6 1"></a-plane> -->
+        <!-- <a-box id="player" player mixin="racket"></a-box> -->
         <a-entity vive-controls="hand: left">
             <a-box player mixin="racket" rotation="-30 0 0"></a-box>
         </a-entity>
         <a-entity vive-controls="hand: right">
             <a-box player mixin="racket" rotation="-30 0 0"></a-box>
         </a-entity>
-         -->
         <!-- enemy -->
         <a-plane id="enemy" position="0 1.0 -4.0" enemy mixin="racket" material="color:red;opacity:1;"></a-plane>
         <!-- env -->
