@@ -20,7 +20,7 @@ AFRAME.registerComponent('enemy', {
         })
     },
     tick: function (t) {
-        const followRate = 0.1 // efficiency of enemy
+        const followRate = 0.8 // efficiency of enemy
 
         const el = this.el
         const myPos = el.getAttribute('position')
