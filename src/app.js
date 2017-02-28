@@ -19,7 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function main() {
         const ball = document.getElementById('ball')
-        ball.emit('startGame')
+        setTimeout(() => {
+            ball.emit('startGame')
+        }, 1000)
     }
 })
 
