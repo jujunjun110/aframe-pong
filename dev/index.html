@@ -14,7 +14,7 @@
         <a-assets>
             <a-mixin id="wall" static-body scale="1.6 4 1" material="color:lightblue"></a-mixin>
             <a-mixin id="goal-wall" static-body material="opacity:0;" scale="100 100 1"></a-mixin>
-            <a-mixin id="racket" material="color: black; opacity:0.8" scale="0.4s 0.4 0.1" static-body></a-mixin>
+            <a-mixin id="racket" geometry="primitive:box" material="color: black; opacity:0.8" scale="0.4 0.4 0.1" static-body></a-mixin>
         </a-assets>
         <!-- walls -->
         <a-plane mixin="wall" position=" 0.8  1.0 -2" rotation="  0 -90 -90"></a-plane>
@@ -30,13 +30,13 @@
         <!-- <a-plane player-mover material="opacity:0;" position="0 1.0 -1.0" scale="1.6 1.6 1"></a-plane> -->
         <!-- <a-box id="player" player mixin="racket"></a-box> -->
         <a-entity vive-controls="hand: left">
-            <a-box player mixin="racket" rotation="-30 0 0"></a-box>
+            <a-entity player mixin="racket" rotation="-30 0 0"></a-entity>
         </a-entity>
         <a-entity vive-controls="hand: right">
-            <a-box player mixin="racket" rotation="-30 0 0"></a-box>
+            <a-entity player mixin="racket" rotation="-30 0 0"></a-entity>
         </a-entity>
         <!-- enemy -->
-        <a-plane id="enemy" position="0 1.0 -4.0" enemy mixin="racket" material="color:red;opacity:1;"></a-plane>
+        <a-entity id="enemy" position="0 1.0 -4.0" enemy mixin="racket" material="color:red;opacity:1;"></a-entity>
         <!-- env -->
         <a-sky color="#ccc"></a-sky>
         <a-camera position="0 0 0" raycaster></a-camera>
