@@ -75,7 +75,7 @@ AFRAME.registerComponent('ball', {
         var speed = new THREE.Vector3().distanceTo(velocity);
 
         var maxSpeed = 2;
-        var zLimit = 0.5;
+        var zLimit = 0.8;
         var vz = velocity.z;
         var speedUpRate = 1.1;
 
@@ -155,7 +155,7 @@ AFRAME.registerComponent('enemy', {
         });
     },
     tick: function tick(t) {
-        var followRate = 0.1; // efficiency of enemy
+        var followRate = 0.8; // efficiency of enemy
 
         var el = this.el;
         var myPos = el.getAttribute('position');
