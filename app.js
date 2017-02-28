@@ -74,17 +74,17 @@ AFRAME.registerComponent('ball', {
         var velocity = this.el.body.velocity;
         var speed = new THREE.Vector3().distanceTo(velocity);
 
-        var maxSpeed = 2;
-        var zLimit = 0.8;
+        var maxSpeed = 5;
+        var zLimit = 1.5;
         var vz = velocity.z;
         var speedUpRate = 1.1;
 
         if (speed > 1) {
             speedUpRate = 1.03;
-        } else if (speed > maxSpeed) {
+        }
+        if (speed > maxSpeed) {
             speedUpRate = 0.97;
         }
-
         if (Math.abs(vz) < zLimit) {
             vz = vz > 0 ? zLimit : -zLimit;
         }
@@ -137,6 +137,11 @@ if (typeof AFRAME === 'undefined') {
 
 /* here you write your components. */
 AFRAME.registerComponent('enemy', {
+    schema: {
+        efficiency: {
+            default: 0.1
+        }
+    },
     init: function init() {
         var _this = this;
 
@@ -155,15 +160,13 @@ AFRAME.registerComponent('enemy', {
         });
     },
     tick: function tick(t) {
-        var followRate = 0.8; // efficiency of enemy
-
         var el = this.el;
         var myPos = el.getAttribute('position');
         var targetPos = this.defaultPosition;
         if (this.isChasingBall) {
             targetPos = this.ball.getAttribute('position');
         }
-        var newPos = new THREE.Vector3(myPos.x + (targetPos.x - myPos.x) * followRate, myPos.y + (targetPos.y - myPos.y) * followRate, myPos.z);
+        var newPos = new THREE.Vector3(myPos.x + (targetPos.x - myPos.x) * this.data.efficiency, myPos.y + (targetPos.y - myPos.y) * this.data.efficiency, myPos.z);
         el.setAttribute('position', newPos);
     }
 });
