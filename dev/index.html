@@ -26,15 +26,13 @@
         <!-- ball -->
         <a-sphere id="ball" id="ball" radius="0.1" material="color: lightgreen" ball dynamic-body position="0 0 -4"></a-sphere>
         <!-- player -->
-        <a-box id="player" player material="color: black; opacity:0.8" scale="0.6 0.6 0.1" static-body></a-box>
-        <!-- 
+        <!-- <a-box id="player" player material="color: black; opacity:0.8" scale="0.6 0.6 0.1" static-body></a-box> -->
         <a-entity vive-controls="hand: left">
-            <a-box player position="0 0 0" material="color: black; opacity:0.8" scale="3 3 0.1" static-body></a-box>
+            <a-box player position="0 0 0" material="color: black; opacity:0.8" scale="0.6 0.6 0.1" rotation="60 0 0" static-body></a-box>
         </a-entity>
         <a-entity vive-controls="hand: right">
-            <a-box player position="0 0 0" material="color: black; opacity:0.8" scale="3 3 0.1" static-body></a-box>
+            <a-box player position="0 0 0" material="color: black; opacity:0.8" scale="0.6 0.6 0.1" rotation="60 0 0" static-body></a-box>
         </a-entity>
-        -->
         <!-- enemy -->
         <a-plane id="enemy" position="0 1.0 -4.0" static-body enemy scale="0.6 0.6 0.1" material="color:red;opacity:1;"></a-plane>
         <!-- env -->
