@@ -1,23 +1,7 @@
-## このプロジェクトについて
-
-A-Frameのわりと本格的なプロダクトを作るための雛形です
-
-以下の手順で展開してください。
-
-1. `git clone git@github.com:jujunjun110/aframe-application-boilerplate.git`
-2. `cd aframe-application-boilerplate && rm -rf .git`
-3. プロジェクトのリモートリポジトリを正しく設定
-4. npm install 
-5. npm run unboil ... package.json 等にプロジェクトネームやgitリポジトリを適切に設定できます。
-
---trim--
-
-# project-name
-
 ## プロジェクトのインストール
 
-1. git clone 
-2. npm install 
+1. git clone
+2. npm install
 
 ## プロジェクトのビルド
 
@@ -33,7 +17,7 @@ A-Frameのわりと本格的なプロダクトを作るための雛形です
  - src/component.js ... コンポーネントを書くところ。書いたら名前を変えてapp.js内でrequireする。ES6でOK。
 - dev以下 ... アプリケーションの実行に本当に必要なファイルだけがあるところ。（開発用）
  - dev/index.html ... メインのHTMLファイル。ここは直接編集します。
- - dev/app.js ... ブラウザで実行可能な形にビルドされた自作スクリプト	。自分では編集しません。
+ - dev/app.js ... ブラウザで実行可能な形にビルドされた自作スクリプト   。自分では編集しません。
  - dev/build.js ... ブラウザで実行可能な形にビルドされた外部スクリプト。自分では編集しません。
 - dist以下 ... 本番用。dev以下のものをより高速に実行できるようにビルドします
  - dist/index.html ... dev/index.html をコピー。自分では編集しません。
