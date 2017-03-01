@@ -102,7 +102,7 @@ AFRAME.registerComponent('ball', {
         body.position = new CANNON.Vec3(this.defaultPos.x, this.defaultPos.y, this.defaultPos.z);
         body.velocity = new CANNON.Vec3(0, 0, 0);
         setTimeout(function () {
-            body.velocity = new CANNON.Vec3((Math.random() + 1) * 0.5, (Math.random() + 1) * 0.5, direction);
+            body.velocity = new CANNON.Vec3((Math.random() + 1) * 0.2, (Math.random() + 1) * 0.2, direction);
         }, 2000);
     },
     restartGame: function restartGame(side) {
@@ -146,7 +146,7 @@ AFRAME.registerComponent('enemy', {
         var _this = this;
 
         this.ball = document.getElementById('ball');
-        this.defaultPosition = this.el.getAttribute('position');
+        this.defaultPos = this.el.getAttribute('position');
         this.isChasingBall = true;
 
         this.el.addEventListener('collide', function () {
@@ -162,7 +162,7 @@ AFRAME.registerComponent('enemy', {
     tick: function tick(t) {
         var el = this.el;
         var myPos = el.getAttribute('position');
-        var targetPos = this.defaultPosition;
+        var targetPos = this.defaultPos;
         if (this.isChasingBall) {
             targetPos = this.ball.getAttribute('position');
         }
