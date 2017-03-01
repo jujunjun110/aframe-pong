@@ -72,8 +72,8 @@ AFRAME.registerComponent('ball', {
         body.velocity = new CANNON.Vec3(0, 0, 0)
         setTimeout(() => {
             body.velocity = new CANNON.Vec3(
-                (Math.random() + 1) * 0.5,
-                (Math.random() + 1) * 0.5,
+                (Math.random() + 1) * 0.2,
+                (Math.random() + 1) * 0.2,
                 direction
             )
         }, 2000)

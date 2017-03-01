@@ -11,7 +11,7 @@ AFRAME.registerComponent('enemy', {
     },
     init: function () {
         this.ball = document.getElementById('ball')
-        this.defaultPosition = this.el.getAttribute('position')
+        this.defaultPos = this.el.getAttribute('position')
         this.isChasingBall = true
 
         this.el.addEventListener('collide', () => {
@@ -27,7 +27,7 @@ AFRAME.registerComponent('enemy', {
     tick: function (t) {
         const el = this.el
         const myPos = el.getAttribute('position')
-        let targetPos = this.defaultPosition
+        let targetPos = this.defaultPos
         if (this.isChasingBall) {
             targetPos = this.ball.getAttribute('position')
         }
