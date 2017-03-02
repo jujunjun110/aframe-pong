@@ -28,11 +28,11 @@
         <!-- enemy -->
         <a-entity id="enemy" position="0 1.0 -4.0" enemy="efficiency: 0.1" mixin="racket" material="color:red;opacity:1;"></a-entity>
         <!-- player -->
-        <a-box id="player" player mixin="racket"></a-box>
-        <a-entity vive-controls="hand: left" position="0 0 100">
+        <!-- <a-box id="player" player mixin="racket"></a-box> -->
+        <a-entity vive-controls="hand: left">
             <a-entity player mixin="racket" rotation="-10 0 0"></a-entity>
         </a-entity>
-        <a-entity vive-controls="hand: right" position="0 0 100">
+        <a-entity vive-controls="hand: right">
             <a-entity player mixin="racket" rotation="-10 0 0"></a-entity>
         </a-entity>
         <!-- env -->
