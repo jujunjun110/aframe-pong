@@ -19,39 +19,31 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         scene.addEventListener('loaded', main);
     }
-});
 
-function main() {
-    setModeIfNeeded();
-    setTimeout(function () {
+    function main() {
+        setModeIfNeeded();
         var ball = document.getElementById('ball');
-        ball.emit('startGame');
-    }, 1000);
-}
+        setTimeout(function () {
+            ball.emit('startGame');
+        }, 1000);
+    }
 
-function setModeIfNeeded() {
-    var queryDict = {};
-
-    window.location.search.substr(1).split('&').forEach(function (item) {
-        queryDict[item.split('=')[0]] = item.split('=')[1];
-    });
-
-    if ('mode' in queryDict) {
+    function setModeIfNeeded() {
+        var queryDict = {};
         var modeList = { 'easy': 0.05, 'normal': 0.1, 'hard': 0.2, 'superhard': 0.3 };
+
+        window.location.search.substr(1).split('&').forEach(function (item) {
+            queryDict[item.split('=')[0]] = item.split('=')[1];
+        });
+
         var efficiency = modeList[queryDict.mode];
+
         if (efficiency) {
             var enemy = document.getElementById('enemy');
             enemy.setAttribute('enemy', 'efficiency', efficiency);
         }
     }
-
-    if ('head' in queryDict) {
-        var headControls = document.getElementById('head-controls');
-        var cam = document.querySelector('a-camera');
-        headControls.setAttribute('visible', true);
-        cam.setAttribute('position', '0 1.2 1');
-    }
-}
+});
 
 },{"./ball.js":2,"./enemy.js":3,"./goal-wall.js":4,"./player-mover.js":5,"./player.js":6}],2:[function(require,module,exports){
 'use strict';
@@ -120,7 +112,6 @@ AFRAME.registerComponent('ball', {
         var el = document.getElementById('ball');
         var body = el.body;
         var direction = side === 'player' ? 1 : -1;
-
         var enemy = document.getElementById('enemy');
         this.canCollide = true;
         enemy.emit('gameStart');
@@ -128,7 +119,7 @@ AFRAME.registerComponent('ball', {
         body.position = new CANNON.Vec3(this.defaultPos.x, this.defaultPos.y, this.defaultPos.z);
         body.velocity = new CANNON.Vec3(0, 0, 0);
         setTimeout(function () {
-            body.velocity = new CANNON.Vec3((Math.random() + 1) * 0.4, (Math.random() + 1) * 0.4, direction * 2);
+            body.velocity = new CANNON.Vec3((Math.random() + 1) * 0.2, (Math.random() + 1) * 0.2, direction);
         }, 2000);
     },
     restartGame: function restartGame(side) {
@@ -237,7 +228,7 @@ AFRAME.registerComponent('player-mover', {
     multiple: false,
     init: function init() {
         var el = this.el;
-        var player = document.getElementById('head-player');
+        var player = document.getElementById('player');
         var playerPos = el.getAttribute('position');
 
         el.addEventListener('raycaster-intersected', function (e) {
