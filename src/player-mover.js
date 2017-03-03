@@ -8,7 +8,7 @@ AFRAME.registerComponent('player-mover', {
     multiple: false,
     init: function () {
         const el = this.el
-        const player = document.getElementById('player')
+        const player = document.getElementById('head-player')
         const playerPos = el.getAttribute('position')
 
         el.addEventListener('raycaster-intersected', (e) => {

@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function main() {
     setModeIfNeeded()
-    const ball = document.getElementById('ball')
     setTimeout(() => {
+        const ball = document.getElementById('ball')
         ball.emit('startGame')
     }, 1000)
 }

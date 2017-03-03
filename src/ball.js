@@ -64,6 +64,7 @@ AFRAME.registerComponent('ball', {
         const el = document.getElementById('ball')
         const body = el.body
         const direction = side === 'player' ? 1 : -1
+
         const enemy = document.getElementById('enemy')
         this.canCollide = true
         enemy.emit('gameStart')
