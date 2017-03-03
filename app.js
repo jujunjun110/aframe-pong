@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function main() {
     setModeIfNeeded();
-    var ball = document.getElementById('ball');
     setTimeout(function () {
+        var ball = document.getElementById('ball');
         ball.emit('startGame');
     }, 1000);
 }
@@ -120,6 +120,7 @@ AFRAME.registerComponent('ball', {
         var el = document.getElementById('ball');
         var body = el.body;
         var direction = side === 'player' ? 1 : -1;
+
         var enemy = document.getElementById('enemy');
         this.canCollide = true;
         enemy.emit('gameStart');
@@ -127,7 +128,7 @@ AFRAME.registerComponent('ball', {
         body.position = new CANNON.Vec3(this.defaultPos.x, this.defaultPos.y, this.defaultPos.z);
         body.velocity = new CANNON.Vec3(0, 0, 0);
         setTimeout(function () {
-            body.velocity = new CANNON.Vec3((Math.random() + 1) * 0.2, (Math.random() + 1) * 0.2, direction);
+            body.velocity = new CANNON.Vec3((Math.random() + 1) * 0.4, (Math.random() + 1) * 0.4, direction * 2);
         }, 2000);
     },
     restartGame: function restartGame(side) {
@@ -236,7 +237,7 @@ AFRAME.registerComponent('player-mover', {
     multiple: false,
     init: function init() {
         var el = this.el;
-        var player = document.getElementById('player');
+        var player = document.getElementById('head-player');
         var playerPos = el.getAttribute('position');
 
         el.addEventListener('raycaster-intersected', function (e) {
