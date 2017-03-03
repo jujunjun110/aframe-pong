@@ -103,18 +103,17 @@ AFRAME.registerComponent('ball', {
         if (!this.el.body) {
             return;
         }
-        var target = document.getElementById('head-player');
-        var enemy = document.getElementById('enemy');
+        var targets = [document.getElementById('head-player'), document.getElementById('lhand'), document.getElementById('rhand'), document.getElementById('enemy')];
         var vel = this.el.body.velocity;
         var vlen = vel.length();
         var norm = new THREE.Vector3(vel.x / vlen, vel.y / vlen, vel.z / vlen);
         var ray = new THREE.Raycaster();
         ray.set(this.el.body.position, norm);
-        var intersectObjects = ray.intersectObjects([target.object3D, enemy.object3D], true);
+        var intersectObjects = ray.intersectObjects(targets, true);
+
         if (intersectObjects[0]) {
             var v = new THREE.Vector3().distanceTo(vel) * timeDelta / 1000;
             if (v > intersectObjects[0].distance) {
-                console.log('will hit in next frame');
                 vel.z = -vel.z;
             }
         }
@@ -152,7 +151,7 @@ AFRAME.registerComponent('ball', {
         body.position = new CANNON.Vec3(this.defaultPos.x, this.defaultPos.y, this.defaultPos.z);
         body.velocity = new CANNON.Vec3(0, 0, 0);
         setTimeout(function () {
-            body.velocity = new CANNON.Vec3(0, 0, 10 * direction);
+            body.velocity = new CANNON.Vec3(0, 0, 2 * direction);
         }, 2000);
     },
     restartGame: function restartGame(side) {

@@ -17,10 +17,10 @@
         <a-sphere id="ball" radius="0.1" material="color: lightgreen" ball dynamic-body position="0 1 -2"></a-sphere>
 
         <a-entity vive-controls="hand: left">
-            <a-entity player mixin="racket" position="0 0 -0.2" rotation="90 0 0"></a-entity>
+            <a-entity id="lhand" player mixin="racket" position="0 0 -0.2" rotation="90 0 0"></a-entity>
         </a-entity>
         <a-entity vive-controls="hand: right">
-            <a-entity player mixin="racket" position="0 0 -0.2" rotation="90 0 0"></a-entity>
+            <a-entity id="rhand" player mixin="racket" position="0 0 -0.2" rotation="90 0 0"></a-entity>
         </a-entity>
 
         <a-entity id="enemy" position="0 1.0 -4.0" enemy="efficiency: 0.1" mixin="racket" material="color:red;opacity:1;"></a-entity>
