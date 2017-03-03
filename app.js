@@ -49,6 +49,12 @@ function setModeIfNeeded() {
         var ball = document.getElementById('ball');
         ball.setAttribute('ball', 'initialSpeed', queryDict['speed']);
     }
+
+    if ('preframe' in queryDict) {
+        var _ball = document.getElementById('ball');
+        _ball.setAttribute('ball', 'preFrame', queryDict['preframe']);
+    }
+
     if ('head' in queryDict) {
         var headControls = document.getElementById('head-controls');
         var handControls = document.querySelectorAll('.hand');
@@ -73,6 +79,9 @@ AFRAME.registerComponent('ball', {
     schema: {
         initialSpeed: {
             default: 2
+        },
+        preFrame: {
+            default: 5
         }
     },
     multiple: false,
@@ -122,7 +131,7 @@ AFRAME.registerComponent('ball', {
         var intersectObjects = ray.intersectObjects(targets, true);
         if (intersectObjects[0]) {
             var v = new THREE.Vector3().distanceTo(vel) * timeDelta / 1000;
-            if (v * 2 > intersectObjects[0].distance) {
+            if (v * this.data.preFrame > intersectObjects[0].distance) {
                 console.log('will hit in the next frame');
                 vel.z = -vel.z;
                 var rad = intersectObjects[0].object.geometry.boundingSphere.radius;
