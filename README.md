@@ -1,14 +1,26 @@
-# Aframe-pong
+# A-Frame Pong
 
 Web VR 3D Air Hockey built with A-Frame
 
 ![A-Frame Pong](https://media.giphy.com/media/xUPGcAotzh2eKwIB0c/giphy.gif)
 
-[DEMO 1](https://jujunjun110.github.io/aframe-pong/)
+## DEMO
+### with HTC Vive
+**[easy](https://jujunjun110.github.io/aframe-pong/?mode=easy)
+ - [normal](https://jujunjun110.github.io/aframe-pong/?mode=normal)
+ - [hard](https://jujunjun110.github.io/aframe-pong/?mode=hard)
+ - [superhard](https://jujunjun110.github.io/aframe-pong/?mode=superhard)**
+
+
 - HTC Vive required.
 - [Web VR available browsers](https://webvr.info/) only.
 
-[DEMO 2](https://jujunjun110.github.io/aframe-pong/headcontrol.html)
+### without Vive
+**[easy](https://jujunjun110.github.io/aframe-pong/?mode=easy&head)
+ - [normal](https://jujunjun110.github.io/aframe-pong/?mode=normal&head)
+ - [hard](https://jujunjun110.github.io/aframe-pong/?mode=hard&head)
+ - [superhard](https://jujunjun110.github.io/aframe-pong/?mode=superhard&head)**
+
 - Any browser available.
 
 
