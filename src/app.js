@@ -27,15 +27,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function setModeIfNeeded() {
         const queryDict = {}
+        const modeList = { 'easy': 0.05, 'normal': 0.1, 'hard': 0.2, 'superhard': 0.3 }
+
         window.location.search.substr(1).split('&').forEach((item) => {
             queryDict[item.split('=')[0]] = item.split('=')[1]
         })
 
-        if (!queryDict.mode) {
-            return
-        }
-
-        const modeList = { 'easy': 0.05, 'normal': 0.1, 'hard': 0.2, 'superhard': 0.3 }
         const efficiency = modeList[queryDict.mode]
 
         if (efficiency) {
