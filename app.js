@@ -19,34 +19,39 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         scene.addEventListener('loaded', main);
     }
+});
 
-    function main() {
-        setModeIfNeeded();
-        var ball = document.getElementById('ball');
-        setTimeout(function () {
-            ball.emit('startGame');
-        }, 1000);
-    }
+function main() {
+    setModeIfNeeded();
+    var ball = document.getElementById('ball');
+    setTimeout(function () {
+        ball.emit('startGame');
+    }, 1000);
+}
 
-    function setModeIfNeeded() {
-        var queryDict = {};
-        window.location.search.substr(1).split('&').forEach(function (item) {
-            queryDict[item.split('=')[0]] = item.split('=')[1];
-        });
+function setModeIfNeeded() {
+    var queryDict = {};
 
-        if (!queryDict.mode) {
-            return;
-        }
+    window.location.search.substr(1).split('&').forEach(function (item) {
+        queryDict[item.split('=')[0]] = item.split('=')[1];
+    });
 
+    if ('mode' in queryDict) {
         var modeList = { 'easy': 0.05, 'normal': 0.1, 'hard': 0.2, 'superhard': 0.3 };
         var efficiency = modeList[queryDict.mode];
-
         if (efficiency) {
             var enemy = document.getElementById('enemy');
             enemy.setAttribute('enemy', 'efficiency', efficiency);
         }
     }
-});
+
+    if ('head' in queryDict) {
+        var headControls = document.getElementById('head-controls');
+        var cam = document.querySelector('a-camera');
+        headControls.setAttribute('visible', true);
+        cam.setAttribute('position', '0 1.2 1');
+    }
+}
 
 },{"./ball.js":2,"./enemy.js":3,"./goal-wall.js":4,"./player-mover.js":5,"./player.js":6}],2:[function(require,module,exports){
 'use strict';
