@@ -103,17 +103,19 @@ AFRAME.registerComponent('ball', {
         if (!this.el.body) {
             return;
         }
-        var targets = [document.getElementById('head-player'), document.getElementById('lhand'), document.getElementById('rhand'), document.getElementById('enemy')];
+
+        var targets = [document.getElementById('head-player').object3D, document.getElementById('lhand').object3D, document.getElementById('rhand').object3D, document.getElementById('enemy').object3D];
+
         var vel = this.el.body.velocity;
         var vlen = vel.length();
         var norm = new THREE.Vector3(vel.x / vlen, vel.y / vlen, vel.z / vlen);
         var ray = new THREE.Raycaster();
         ray.set(this.el.body.position, norm);
         var intersectObjects = ray.intersectObjects(targets, true);
-
         if (intersectObjects[0]) {
             var v = new THREE.Vector3().distanceTo(vel) * timeDelta / 1000;
             if (v > intersectObjects[0].distance) {
+                console.log('will hit in next frame');
                 vel.z = -vel.z;
             }
         }
