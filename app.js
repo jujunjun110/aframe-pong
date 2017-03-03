@@ -99,6 +99,26 @@ AFRAME.registerComponent('ball', {
             _this.restartGame(e.detail.side);
         });
     },
+    tick: function tick(time, timeDelta) {
+        if (!this.el.body) {
+            return;
+        }
+        var target = document.getElementById('head-player');
+        var enemy = document.getElementById('enemy');
+        var vel = this.el.body.velocity;
+        var vlen = vel.length();
+        var norm = new THREE.Vector3(vel.x / vlen, vel.y / vlen, vel.z / vlen);
+        var ray = new THREE.Raycaster();
+        ray.set(this.el.body.position, norm);
+        var intersectObjects = ray.intersectObjects([target.object3D, enemy.object3D], true);
+        if (intersectObjects[0]) {
+            var v = new THREE.Vector3().distanceTo(vel) * timeDelta / 1000;
+            if (v > intersectObjects[0].distance) {
+                console.log('will hit in next frame');
+                vel.z = -vel.z;
+            }
+        }
+    },
     speedUpIfNeeded: function speedUpIfNeeded() {
         var velocity = this.el.body.velocity;
         var speed = new THREE.Vector3().distanceTo(velocity);
@@ -132,7 +152,7 @@ AFRAME.registerComponent('ball', {
         body.position = new CANNON.Vec3(this.defaultPos.x, this.defaultPos.y, this.defaultPos.z);
         body.velocity = new CANNON.Vec3(0, 0, 0);
         setTimeout(function () {
-            body.velocity = new CANNON.Vec3((Math.random() + 1) * 0.4, (Math.random() + 1) * 0.4, direction * 2);
+            body.velocity = new CANNON.Vec3(0, 0, 10 * direction);
         }, 2000);
     },
     restartGame: function restartGame(side) {
