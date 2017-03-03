@@ -66,7 +66,11 @@ if (typeof AFRAME === 'undefined') {
 
 /* here you write your components. */
 AFRAME.registerComponent('ball', {
-    schema: {},
+    schema: {
+        initialSpeed: {
+            default: 2
+        }
+    },
     multiple: false,
     init: function init() {
         var _this = this;
@@ -114,13 +118,20 @@ AFRAME.registerComponent('ball', {
         var intersectObjects = ray.intersectObjects(targets, true);
         if (intersectObjects[0]) {
             var v = new THREE.Vector3().distanceTo(vel) * timeDelta / 1000;
-            if (v > intersectObjects[0].distance) {
-                console.log('will hit in next frame');
+            if (v * 2 > intersectObjects[0].distance) {
+                console.log('will hit in the next frame');
                 vel.z = -vel.z;
+                var rad = intersectObjects[0].object.geometry.boundingSphere.radius;
+                var tempRad = rad;
+                rad = 0;
+                setTimeout(function () {
+                    rad = tempRad;
+                }, timeDelta * 10);
             }
         }
     },
     speedUpIfNeeded: function speedUpIfNeeded() {
+        console.log('collision');
         var velocity = this.el.body.velocity;
         var speed = new THREE.Vector3().distanceTo(velocity);
 
@@ -144,6 +155,7 @@ AFRAME.registerComponent('ball', {
     startGame: function startGame(side) {
         var el = document.getElementById('ball');
         var body = el.body;
+        body.collisionResponse = false;
         var direction = side === 'player' ? 1 : -1;
 
         var enemy = document.getElementById('enemy');
