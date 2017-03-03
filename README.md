@@ -1,17 +1,29 @@
 # Aframe-pong
 
-### プロジェクトのインストール
+Web VR 3D Air Hockey built with A-Frame
+
+![A-Frame Pong](https://media.giphy.com/media/xUPGcAotzh2eKwIB0c/giphy.gif)
+
+[DEMO 1](https://jujunjun110.github.io/aframe-pong/)
+- HTC Vive required.
+- Web VR available browser only.
+
+[DEMO 2](https://jujunjun110.github.io/aframe-pong/headcontrol.html)
+- Any browser available.
+
+
+### Install
 
 1. git clone
 2. npm install
 
-### プロジェクトのビルド
+### Build
 
 1. npm run build ... アプリケーションをビルドします。
-2. npm run dev ... nodeサーバーを開きアプリケーションを実行します。`src/app.js` への変更はリアルタイムにブラウザ側に反映されます。
+2. npm run dev ... nodeサーバーを開きアプリケーションを実行します。
 3. npm run dist ... 本番環境にアップロードするファイルをdist/ 以下にビルドします。
 
-### ファイル構成
+### Files
 
 - src以下 ... 自分でjavascriptを編集するところ。
  - src/require.js ... 必要な外部モジュールを書くところ。dev/build.jsにビルドされます。
