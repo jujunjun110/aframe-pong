@@ -6,7 +6,7 @@ Web VR 3D Air Hockey built with A-Frame
 
 [DEMO 1](https://jujunjun110.github.io/aframe-pong/)
 - HTC Vive required.
-- Web VR available browser only.
+- [Web VR available browsers](https://webvr.info/) only.
 
 [DEMO 2](https://jujunjun110.github.io/aframe-pong/headcontrol.html)
 - Any browser available.
