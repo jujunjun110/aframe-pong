@@ -14,7 +14,7 @@
             <a-mixin id="racket" geometry="primitive:box" material="color: black; opacity:0.8" scale="0.4 0.4 0.05" static-body></a-mixin>
         </a-assets>
 
-        <a-sphere id="ball" radius="0.1" material="color: lightgreen" ball dynamic-body position="0 1 -2"></a-sphere>
+        <a-sphere id="ball" radius="0.1" material="color: lightgreen" ball="initialSpeed:5" dynamic-body position="0 1 -2"></a-sphere>
 
         <a-entity vive-controls="hand: left">
             <a-entity id="lhand" player mixin="racket" position="0 0 -0.2" rotation="90 0 0"></a-entity>

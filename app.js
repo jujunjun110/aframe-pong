@@ -45,6 +45,10 @@ function setModeIfNeeded() {
         }
     }
 
+    if ('speed' in queryDict) {
+        var ball = document.getElementById('ball');
+        ball.setAttribute('ball', 'initialSpeed', queryDict['speed']);
+    }
     if ('head' in queryDict) {
         var headControls = document.getElementById('head-controls');
         var handControls = document.querySelectorAll('.hand');
@@ -153,6 +157,8 @@ AFRAME.registerComponent('ball', {
         this.el.body.velocity = new CANNON.Vec3(velocity.x * speedUpRate, velocity.y * speedUpRate, vz * speedUpRate);
     },
     startGame: function startGame(side) {
+        var _this2 = this;
+
         var el = document.getElementById('ball');
         var body = el.body;
         body.collisionResponse = false;
@@ -165,14 +171,14 @@ AFRAME.registerComponent('ball', {
         body.position = new CANNON.Vec3(this.defaultPos.x, this.defaultPos.y, this.defaultPos.z);
         body.velocity = new CANNON.Vec3(0, 0, 0);
         setTimeout(function () {
-            body.velocity = new CANNON.Vec3(0, 0, 2 * direction);
+            body.velocity = new CANNON.Vec3(0, 0, _this2.data.initialSpeed * direction);
         }, 2000);
     },
     restartGame: function restartGame(side) {
-        var _this2 = this;
+        var _this3 = this;
 
         setTimeout(function () {
-            _this2.startGame(side);
+            _this3.startGame(side);
         }, 1000);
     },
     reloadLcd: function reloadLcd() {
