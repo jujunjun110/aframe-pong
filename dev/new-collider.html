@@ -7,8 +7,8 @@
 </head>
 
 <body>
-    <!-- <a-scene physics="debug: true;gravity: 0;friction: 0; restitution: 1.0;" antialias="true"> -->
-    <a-scene physics="debug: false;gravity: 0;friction: 0; restitution: 1.0;" antialias="true">
+    <a-scene physics="debug: true;gravity: 0;friction: 0; restitution: 1.0;" antialias="true">
+        <!-- <a-scene physics="debug: false;gravity: 0;friction: 0; restitution: 1.0;" antialias="true"> -->
         <a-assets>
             <a-mixin id="wall" geometry="primitive:box" static-body scale="1.7 4 0.1" material="color:lightblue"></a-mixin>
             <a-mixin id="goal-wall" static-body material="opacity:0;" scale="100 100 1"></a-mixin>
@@ -19,15 +19,13 @@
 
         <a-sphere id="ball" radius="0.1" material="color: lightgreen" ball dynamic-body position="0 1 -2"></a-sphere>
 
-        <a-entity vive-controls="hand: left">
-            <a-entity vive-controls="hand: right">
-                <a-entity mixin="racket-collider">
-                    <a-entity mixin="racket"></a-entity>
-                </a-entity>
+        <a-entity class="hand" vive-controls="hand: left">
+            <a-entity mixin="racket-collider" position="0 0 -0.2" rotation="90 0 0">
+                <a-entity mixin="racket"></a-entity>
             </a-entity>
         </a-entity>
-        <a-entity vive-controls="hand: right">
-            <a-entity mixin="racket-collider">
+        <a-entity class="hand" vive-controls="hand: right">
+            <a-entity mixin="racket-collider" position="0 0 -0.2" rotation="90 0 0">
                 <a-entity mixin="racket"></a-entity>
             </a-entity>
         </a-entity>

@@ -44,8 +44,12 @@ function setModeIfNeeded() {
 
     if ('head' in queryDict) {
         const headControls = document.getElementById('head-controls')
+        const handControls = document.querySelectorAll('.hand')
         const cam = document.querySelector('a-camera')
         headControls.setAttribute('visible', true)
+        handControls.forEach((hand) => {
+            hand.setAttribute('visible', false)
+        })
         cam.setAttribute('position', '0 1.2 1')
     }
 }

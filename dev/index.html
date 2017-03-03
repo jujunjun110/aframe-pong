@@ -29,14 +29,14 @@
         <a-entity mixin="wall" position="   0  0.2 -2" rotation="-90   0   0"></a-entity>
         <a-entity mixin="wall" position="   0  1.8 -2" rotation=" 90   0   0"></a-entity>
         <a-entity id="lcd" bmfont-text="text: 0 - 0;align:center;" position="-2.5 1 -2"></a-entity>
-        <a-plane goal-wall="side: player" position="0 1  1" mixin="goal-wall"></a-plane>
-        <a-plane goal-wall="side: enemy " position="0 1 -5" mixin="goal-wall"></a-plane>
         <a-sky color="#ccc"></a-sky>
         <a-camera position="0 0 0" raycaster></a-camera>
         <a-entity id="head-controls" visible="false">
-            <a-box id="player" player mixin="racket"></a-box>
+            <a-box id="head-player" player mixin="racket"></a-box>
             <a-plane player-mover material="opacity:0;" position="0 1.0 -0.2" scale="1.3 1.3 0.1"></a-plane>
         </a-entity>
+        <a-plane goal-wall="side: player" position="0 1  1" mixin="goal-wall"></a-plane>
+        <a-plane goal-wall="side: enemy " position="0 1 -5" mixin="goal-wall"></a-plane>
     </a-scene>
 </body>
 
