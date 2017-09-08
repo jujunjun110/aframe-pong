@@ -19,7 +19,7 @@ AFRAME.registerComponent('ball', {
             this.speedUpIfNeeded()
         })
         el.addEventListener('startGame', () => {
-            this.startGame('player')
+            this.startGame('enemy')
         })
         el.addEventListener('gameEnded', (e) => {
             if (!this.canCollide) {
@@ -29,13 +29,13 @@ AFRAME.registerComponent('ball', {
 
             const el = this.el
             el.body.velocity = new CANNON.Vec3(0, 0, 0)
-            const winner = e.detail.side === 'player' ? 'enemy' : 'player'
+            const winner = e.detail.side
             this.points[winner] += 1
             this.reloadLcd()
             if (this.points.player >= this.matchPoint || this.points.enemy >= this.matchPoint) {
                 return
             }
-            this.restartGame(e.detail.side)
+            this.restartGame(winner)
         })
     },
     startGame: function(side) {
@@ -47,7 +47,8 @@ AFRAME.registerComponent('ball', {
     startMoving: function(side) {
         const el = this.el
         const body = el.body
-        const direction = side === 'player' ? 1 : -1
+
+        const direction = side === 'player' ? -1 : 1
         body.position = new CANNON.Vec3(this.defaultPos.x, this.defaultPos.y, this.defaultPos.z)
         body.velocity = new CANNON.Vec3(0, 0, 0)
         setTimeout(() => {
