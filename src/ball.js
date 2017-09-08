@@ -39,13 +39,15 @@ AFRAME.registerComponent('ball', {
         })
     },
     startGame: function(side) {
-        const el = document.getElementById('ball')
+        const enemy = document.getElementById('enemy')
+        enemy.emit('gameStart')
+        this.canCollide = true
+        this.startMoving('side')
+    },
+    startMoving: function(side) {
+        const el = this.el
         const body = el.body
         const direction = side === 'player' ? 1 : -1
-        const enemy = document.getElementById('enemy')
-        this.canCollide = true
-        enemy.emit('gameStart')
-
         body.position = new CANNON.Vec3(this.defaultPos.x, this.defaultPos.y, this.defaultPos.z)
         body.velocity = new CANNON.Vec3(0, 0, 0)
         setTimeout(() => {
