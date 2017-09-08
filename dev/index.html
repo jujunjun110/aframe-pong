@@ -4,37 +4,43 @@
     <title>Aframe-Pong</title>
     <script src="./build.js"></script>
     <script src="./app.js"></script>
-    <!-- Origin Trial Token, feature = WebVR, origin = https://jujunjun110.github.io, expires = 2017-04-07 -->
-    <meta http-equiv="origin-trial" data-feature="WebVR" data-expires="2017-04-07" content="Al8ODP7rrI3XNidV/OXeN4akx4QzWz0JJMOdjEfo23n0nlGorQj4UA/j7MpwEiQlWO7blIHaGLNfc48ar7XwmQYAAABneyJvcmlnaW4iOiJodHRwczovL2p1anVuanVuMTEwLmdpdGh1Yi5pbzo0NDMiLCJmZWF0dXJlIjoiV2ViVlIiLCJleHBpcnkiOjE0OTE1NzQyNjMsImlzU3ViZG9tYWluIjp0cnVlfQ==">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
     <a-scene physics="debug: false;gravity: 0;friction: 0; restitution: 1.0;" antialias="true">
         <a-assets>
-            <a-mixin id="wall" geometry="primitive:box" static-body scale="1.7 4 0.1" material="color:lightblue"></a-mixin>
-            <a-mixin id="goal-wall" static-body material="opacity:0;" scale="100 100 1"></a-mixin>
+            <!-- mixin: 複数の属性をまとめて定義し、他のオブジェクトに付与することでその属性を実現できる機能。 -->
+            <a-mixin id="wall" geometry="primitive:box" scale="1.7 4 0.1" material="color:lightblue" static-body></a-mixin>
+            <a-mixin id="goal-wall" material="opacity:0" scale="100 100 1" static-body></a-mixin>
             <a-mixin id="racket" geometry="primitive:box" material="color: black; opacity:0.8" scale="0.4 0.4 0.05" static-body></a-mixin>
+            <audio id="hit" src="sound/hit.mp3" preload="auto"></audio>
         </a-assets>
 
-        <a-sphere id="ball" radius="0.1" material="color: lightgreen" ball dynamic-body position="0 1 -2"></a-sphere>
-		
-        <a-entity vive-controls="hand: left">
-            <a-entity player mixin="racket" position="0 0 -0.2" rotation="90 0 0"></a-entity>
-        </a-entity>
-        <a-entity vive-controls="hand: right">
-            <a-entity player mixin="racket" position="0 0 -0.2" rotation="90 0 0"></a-entity>
-        </a-entity>
-        <a-entity id="enemy" position="0 1.0 -4.0" enemy="efficiency: 0.1" mixin="racket" material="color:red;opacity:1;"></a-entity>
-
+        <!-- 外壁 -->
         <a-entity mixin="wall" position=" 0.8  1.0 -2" rotation="  0 -90 -90"></a-entity>
         <a-entity mixin="wall" position="-0.8  1.0 -2" rotation="  0  90 -90"></a-entity>
         <a-entity mixin="wall" position="   0  0.2 -2" rotation="-90   0   0"></a-entity>
         <a-entity mixin="wall" position="   0  1.8 -2" rotation=" 90   0   0"></a-entity>
         <a-entity id="lcd" bmfont-text="text: 0 - 0;align:center;" position="-2.5 1 -2"></a-entity>
+
+        <!-- ボール: 今回はこのオブジェクトが全体的なゲームの勝敗の管理を行う作りになっています。 -->
+        <a-sphere id="ball" radius="0.1" material="color: lightgreen" ball position="0 1 -2" sound="src: #hit" dynamic-body></a-sphere>
+
+        <!-- 対戦相手 -->
+        <a-entity id="enemy" position="0 1.0 -4.0" enemy="efficiency: 0.1" mixin="racket" material="color:red;opacity:1;"></a-entity>
+
+        <!-- プレイヤー -->
+        <a-box id="player" player position="0 1.0 0" mixin="racket"></a-box>
+        <a-camera position="0 -0.5 1" raycaster></a-camera>
+        
+        <!-- プレイヤーを視線で動かすための平面。今は薄い色が付いているがうまく実装できたら消してOK。 -->
+        <a-plane player-mover material="opacity:0; color:blue" position="0 1.0 0" scale="1.3 1.3 0.1"></a-plane>
+
+        <!-- ゲームの勝敗を判定するための壁。各プレイヤーの後ろにあり、とても大きい。 -->
         <a-plane goal-wall="side: player" position="0 1  1" mixin="goal-wall"></a-plane>
         <a-plane goal-wall="side: enemy " position="0 1 -5" mixin="goal-wall"></a-plane>
-        <a-camera position="0 0 0" raycaster></a-camera>
+
         <a-sky color="#ccc"></a-sky>
     </a-scene>
 </body>
