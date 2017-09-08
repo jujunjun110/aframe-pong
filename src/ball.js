@@ -42,9 +42,9 @@ AFRAME.registerComponent('ball', {
         const enemy = document.getElementById('enemy')
         enemy.emit('gameStart')
         this.canCollide = true
-        this.startMoving('side')
+        this.Fire('side')
     },
-    startMoving: function(side) {
+    Fire: function(side) {
         const el = this.el
         const body = el.body
 
