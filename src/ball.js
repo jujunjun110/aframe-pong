@@ -18,9 +18,11 @@ AFRAME.registerComponent('ball', {
         el.addEventListener('collide', () => {
             this.speedUpIfNeeded()
         })
+
         el.addEventListener('startGame', () => {
             this.startGame('enemy')
         })
+
         el.addEventListener('gameEnded', (e) => {
             if (!this.canCollide) {
                 return
@@ -42,22 +44,21 @@ AFRAME.registerComponent('ball', {
         const enemy = document.getElementById('enemy')
         enemy.emit('gameStart')
         this.canCollide = true
-        this.Fire('side')
+        this.Fire('side') // ボールを発射する
     },
     Fire: function(side) {
-        const el = this.el
-        const body = el.body
+        const el = this.el　 // ボール自身のDOMエレメント
+        const body = el.body // ボール自身のCANNONオブジェクト
 
-        const direction = side === 'player' ? -1 : 1
-        body.position = new CANNON.Vec3(this.defaultPos.x, this.defaultPos.y, this.defaultPos.z)
-        body.velocity = new CANNON.Vec3(0, 0, 0)
-        setTimeout(() => {
-            body.velocity = new CANNON.Vec3(
-                (Math.random() + 1) * 0.2,
-                (Math.random() + 1) * 0.2,
-                direction
-            )
-        }, 2000)
+        // 修正ポイント②
+        // TODO: 2秒後に、前回の勝者と逆側にボールが発射されるようにしてください。
+
+        // ① ボール自身をフィールドの中央の地点(0, 0, 0)に戻し、静止させる
+        // ② ボールの初期進行方向を決める（多少ランダムな方向だとさらにGood)
+        // ③ 2秒後に、その方向に向かってボールを発射する
+
+        // 引数
+        // side: 前回勝利した側 ('player' or 'enemy') が渡ってくる
     },
     restartGame: function(side) {
         setTimeout(() => {
