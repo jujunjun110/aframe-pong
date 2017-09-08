@@ -16,6 +16,7 @@ AFRAME.registerComponent('ball', {
         }
 
         el.addEventListener('collide', () => {
+            this.el.components.sound.playSound()
             this.speedUpIfNeeded()
         })
         el.addEventListener('startGame', () => {
