@@ -30,7 +30,8 @@ AFRAME.registerComponent('ball', {
 
             const el = this.el
             el.body.velocity = new CANNON.Vec3(0, 0, 0)
-            const winner = e.detail.side
+
+            const winner = e.detail.side === 'player' ? 'enemy' : 'player'
             this.points[winner] += 1
             this.reloadLcd()
             if (this.points.player >= this.matchPoint || this.points.enemy >= this.matchPoint) {
@@ -43,7 +44,7 @@ AFRAME.registerComponent('ball', {
         const enemy = document.getElementById('enemy')
         enemy.emit('gameStart')
         this.canCollide = true
-        this.Fire('side')
+        this.Fire(side) // ボールを発射する
     },
     Fire: function(side) {
         const el = this.el
